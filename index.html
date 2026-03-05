@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>" />
+  <title>P05 新闻阅读门槛测算仪</title>
+    <link rel="stylesheet" href="../shared/design-tokens.css" />
+<link rel="stylesheet" href="./styles.css" />
+  <meta name="description" content="新闻阅读门槛测算仪。P05 新闻阅读门槛测算仪" />
+  <meta property="og:title" content="P05 新闻阅读门槛测算仪" />
+  <meta property="og:description" content="新闻阅读门槛测算仪 — 前端纯静态新闻工具" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yuuqq.github.io/P05-flesch-meter/" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>新闻阅读门槛测算仪</h1>
+      <p>实时估算稿件阅读难度，帮助你压缩长句、降低阅读门槛。</p>
+      <p class="note">包含英文 Flesch 指标 + 中文启发式可读性估算。</p>
+    </header>
+
+    <section class="card">
+      <label for="textInput">稿件文本</label>
+      <textarea id="textInput" rows="12" placeholder="粘贴新闻稿件..."></textarea>
+      <div class="sample-block">
+        <label for="sampleSelect">真实新闻示例（改写版）</label>
+        <select id="sampleSelect"></select>
+        <p id="sampleMeta" class="note">来源: -</p>
+        <a id="sampleLink" class="sample-link" href="#" target="_blank" rel="noopener noreferrer">查看原始报道</a>
+      </div>
+      <div class="actions">
+        <button id="loadSampleBtn" type="button">载入示例并计算</button>
+        <button id="calcBtn" type="button">计算可读性</button>
+        <button id="clearBtn" type="button">清空</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>核心指标</h2>
+        <ul id="metrics" class="metrics"></ul>
+      </article>
+      <article class="card">
+        <h2>结果解释</h2>
+        <p id="mode">模式: -</p>
+        <p id="score">分数: -</p>
+        <p id="level">建议门槛: -</p>
+      </article>
+    </section>
+  </main>
+    <script src="./pm-metrics.js" defer></script>
+<script src="./app.js" defer></script>
+
+  <!-- Privacy Notice -->
+  <div style="text-align:center;padding:12px 16px;font-size:12px;color:#888;border-top:1px solid #eee;margin-top:24px;">
+    🔒 隐私提示：本工具所有数据处理均在您的浏览器本地完成，不会上传任何数据至服务器。
+  </div>
+
+  <!-- Cross-Project Navigation -->
+  <nav style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:13px;border-top:1px solid #e5e5e5;margin-top:16px;color:#666;">
+    <a href="https://yuuqq.github.io/_codex/" style="text-decoration:none;">📋 工具箱导航</a>
+    <span style="opacity:.4">P05</span>
+  </nav>
+</body>
+</html>

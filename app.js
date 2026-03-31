@@ -211,6 +211,8 @@ function calculateReadability() {
 }
 
 initSampleOptions();
+// auto-load first sample on page init for instant demo
+loadSampleBtn.click();
 
 sampleSelect.addEventListener("change", () => {
   const sample = getSelectedSample();

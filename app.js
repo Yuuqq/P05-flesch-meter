@@ -211,8 +211,6 @@ function calculateReadability() {
 }
 
 initSampleOptions();
-// auto-load first sample on page init for instant demo
-loadSampleBtn.click();
 
 sampleSelect.addEventListener("change", () => {
   const sample = getSelectedSample();
@@ -226,6 +224,9 @@ loadSampleBtn.addEventListener("click", () => {
   updateSampleMeta(sample);
   calculateReadability();
 });
+
+// auto-load first sample on page init for instant demo
+loadSampleBtn.click();
 
 calcBtn.addEventListener("click", () => {
   calculateReadability();
@@ -254,16 +255,4 @@ clearBtn.addEventListener("click", () => {
       }
     }, { once: false });
   } catch (_e) {}
-})();
-
-
-// === auto-analyze demo text on load ===
-(function() {
-  setTimeout(function() {
-    var ta = document.getElementById('inputText') || document.querySelector('textarea');
-    if (ta && ta.value.trim()) {
-      var btn = document.getElementById('analyzeBtn') || document.querySelector('button[id*="nalyze"]') || document.querySelector('button');
-      if (btn) btn.click();
-    }
-  }, 1000);
 })();

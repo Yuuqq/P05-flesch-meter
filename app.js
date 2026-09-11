@@ -139,7 +139,7 @@ function chineseReadability(text) {
   const sentences = splitSentences(text);
   const sentenceCount = Math.max(1, sentences.length);
   const avgCharsPerSentence = chars / sentenceCount;
-  const difficultChars = (text.match(/[龘齉饕鬣]/g) || []).length;
+  const difficultChars = (text.match(/[龘齉饕鬣\u3400-\u4DBF]/g) || []).length;
   const difficultRatio = chars ? difficultChars / chars : 0;
 
   // 启发式分值，越高越易读。
@@ -211,8 +211,6 @@ function calculateReadability() {
 }
 
 initSampleOptions();
-// auto-load first sample on page init for instant demo
-loadSampleBtn.click();
 
 sampleSelect.addEventListener("change", () => {
   const sample = getSelectedSample();
@@ -239,6 +237,9 @@ clearBtn.addEventListener("click", () => {
   levelEl.textContent = "建议门槛: -";
 });
 
+// auto-load first sample on page init for instant demo
+loadSampleBtn.click();
+
 // === PM Metrics Integration ===
 (function() {
   try {
@@ -257,13 +258,3 @@ clearBtn.addEventListener("click", () => {
 })();
 
 
-// === auto-analyze demo text on load ===
-(function() {
-  setTimeout(function() {
-    var ta = document.getElementById('inputText') || document.querySelector('textarea');
-    if (ta && ta.value.trim()) {
-      var btn = document.getElementById('analyzeBtn') || document.querySelector('button[id*="nalyze"]') || document.querySelector('button');
-      if (btn) btn.click();
-    }
-  }, 1000);
-})();

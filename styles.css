@@ -30,7 +30,7 @@ body {
 .card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 6px;
   padding: 14px;
   margin-bottom: 12px;
 }
@@ -99,7 +99,7 @@ select {
 
 button {
   border: 0;
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 8px 14px;
   color: #fff;
   cursor: pointer;

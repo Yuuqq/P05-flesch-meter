@@ -1,9 +1,9 @@
 :root {
-  --bg: #f6f4ff;
-  --card: #ffffff;
-  --line: #d6d0ef;
-  --ink: #22193a;
-  --accent: #5f46b5;
+  --bg: #F0E6CF;
+  --card: #F7EFDA;
+  --line: #D3C4A0;
+  --ink: #3A2E20;
+  --accent: #A2402F;
 }
 
 * {
@@ -15,8 +15,8 @@ body {
   color: var(--ink);
   font-family: "Source Sans 3", "Noto Sans SC", sans-serif;
   background:
-    radial-gradient(circle at 20% 10%, #ece5ff 0, transparent 35%),
-    radial-gradient(circle at 80% 85%, #e8f3ff 0, transparent 35%),
+    radial-gradient(circle at 20% 10%, #FFF8E8 0, transparent 35%),
+    radial-gradient(circle at 80% 85%, #E8DCBC 0, transparent 35%),
     var(--bg);
 }
 
@@ -40,7 +40,7 @@ body {
 }
 
 .note {
-  color: #4b3e7c;
+  color: #6E5B41;
 }
 
 label {
@@ -58,7 +58,7 @@ button {
 textarea {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 10px;
 }
 
@@ -66,14 +66,14 @@ textarea {
   margin-top: 10px;
   padding: 10px;
   border: 1px dashed var(--line);
-  border-radius: 10px;
-  background: #faf8ff;
+  border-radius: 6px;
+  background: #F7EFDA;
 }
 
 select {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 8px 10px;
   background: #fff;
 }
@@ -103,7 +103,7 @@ button {
   padding: 8px 14px;
   color: #fff;
   cursor: pointer;
-  background: linear-gradient(135deg, #6a56be, #4a3598);
+  background: #3A2E20;
 }
 
 .grid {
@@ -126,19 +126,19 @@ button {
 
 /* === Dark Mode Override (auto-generated) === */
 :root[data-theme="dark"] {
-  --bg: #1a1a2e;
-  --card: #242438;
-  --line: #3a3a50;
-  --ink: #e8e8f0;
-  --accent: #ff7b54;
+  --bg: #241B11;
+  --card: #2F2618;
+  --line: #5C4A32;
+  --ink: #F7EFDA;
+  --accent: #C45A45;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-  --bg: #1a1a2e;
-  --card: #242438;
-  --line: #3a3a50;
-  --ink: #e8e8f0;
-  --accent: #ff7b54;
+  --bg: #241B11;
+  --card: #2F2618;
+  --line: #5C4A32;
+  --ink: #F7EFDA;
+  --accent: #C45A45;
   }
 }
 
@@ -254,7 +254,7 @@ details[open] summary { margin-bottom: 8px; }
 }
 .toast-msg {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #333; color: #fff; padding: 10px 20px; border-radius: 8px;
+  background: #333; color: #fff; padding: 10px 20px; border-radius: 6px;
   font-size: 0.9rem; z-index: 9999; opacity: 0;
   transition: opacity 0.3s ease;
 }

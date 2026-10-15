@@ -36,7 +36,7 @@ a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
     <section class="card">
       <details class="teach-card" open>
         <summary>🎓 可读性指数与新闻质量</summary>
-        <p>Flesch 可读性指数是衡量文本阅读难度的经典公式，基于句长和音节数计算。在新闻写作中，降低阅读门槛意味着更广泛的受众覆盖。数值越高越容易阅读：60-70 分适合普通读者，30 分以下属专业/学术级别。</p>
+        <p>Flesch Reading Ease 按句长和音节数估算英文难度。数值越高越容易阅读：60–70 分适合普通读者，30 分以下属专业/学术级别。英文结果是原始分，可以低于 0 或高于 100。中文结果是 0–100 的启发式估算。</p>
       </details>
     </section>
 
@@ -56,7 +56,7 @@ a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
       </div>
     </section>
 
-    <section class="grid">
+    <section class="grid" aria-live="polite" aria-atomic="true">
       <article class="card">
         <h2>核心指标</h2>
         <ul id="metrics" class="metrics"></ul>

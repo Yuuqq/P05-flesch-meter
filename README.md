@@ -9,15 +9,21 @@
 
 **[https://yuuqq.github.io/P05-flesch-meter/](https://yuuqq.github.io/P05-flesch-meter/)**
 
-支持安装为 PWA 应用，离线使用。
+可以注册 Service Worker。离线是否可用，取决于安装时核心文件有没有进缓存。
+
+## 本地运行
+
+在仓库目录执行 `python3 -m http.server`，打开页面即可。计算逻辑不依赖外链。旁边如果没有 `../shared/`，设计令牌和 `loader.js` 会 404，暗色模式和命令面板不会出现。这条回退由 [PR #1](https://github.com/Yuuqq/P05-flesch-meter/pull/1) 处理。
 
 ## ✨ 功能特性
 
-- 🌗 暗色/亮色模式一键切换
-- 🔍 `Ctrl+K` 跨工具搜索跳转
-- 📱 PWA 离线支持（可安装到桌面/手机）
-- ♿ 完整无障碍标签（aria-label）
-- 🔒 所有数据仅在浏览器本地处理
+- 🌗 暗色/亮色模式（由 `../shared/releases/v2.6/loader.js` 提供）
+- 🔍 `Ctrl+K` 跨工具搜索跳转（同上，依赖 shared）
+- 📱 本目录 `sw.js` 缓存同域静态文件
+- ♿ 操作按钮使用可见中文名称；结果区用 `aria-live` 播报
+- 🔒 稿件只在浏览器本地计算，不上传
+
+
 
 ## 🛠️ 技术栈
 
@@ -25,15 +31,12 @@
 - CSS 变量设计令牌系统
 - Service Worker 缓存策略
 
-## 📦 共享模块
+## 📦 本页实际加载
 
-- `design-tokens.css` — 统一设计令牌与暗色模式
-- `dark-toggle.js` — 🌗 暗色/亮色模式切换
-- `cmd-palette.js` — 🔍 Ctrl+K 命令面板
-- `toast.js` — 🔔 Toast 通知系统
-- `onboarding.js` — 🎯 首次访问引导
-- `sw.js` — 📱 PWA Service Worker
-- `pm-metrics.js` — 📊 使用量遥测
+- `../shared/design-tokens.css` — 设计令牌
+- `../shared/releases/v2.6/loader.js` — 暗色、命令面板、引导等（`data-modules`）
+- `sw.js` — 本工具 Service Worker，只清理 `journalism-tool-P05-` 前缀的缓存
+- `pm-metrics.js` — 使用记录写在本地 `localStorage`，最多保留 500 条
 
 ## 📄 许可
 

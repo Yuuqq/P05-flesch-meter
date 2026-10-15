@@ -2,47 +2,35 @@
 
 ## Environment
 
-- **Browser**: Chrome 110+
-- **OS**: Windows / macOS
-- **Date**: 2026-02-27
+- **Date**: 2026-10-15
+- **Checked against**: 本分支当前 `app.js` / `index.html` / `sw.js`
+- **Score check**: Node 复现 `countSyllables`、`splitSentences`、`englishReadability`、`chineseReadability`
 
-## Functional Test Cases
+## 本轮核对
 
-1. **核心流程测试**
-   - Steps: 打开 index.html → 输入测试数据 → 执行核心操作
-   - Expected: 正确输出结果
-   - Actual: 通过
-   - Pass/Fail: **Pass**
+- 自动载入在按钮监听之后（`app.js` 243 行监听，265 行 `click()`）
+- 已删除会在 1 秒后点击第一个按钮的定时器
+- 三个操作按钮没有 `aria-label`（`index.html` 53–55 行）
+- 结果区有 `aria-live="polite"`（59 行）
+- 英文分数不再带 `/ 100`
+- 难字正则只有 `龘齉饕鬣`，不含 CJK 扩展 A
 
-### 已验证项
-  - [x] 英文文本输出 Flesch 分数
-  - [x] 中文文本输出启发式分数
-  - [x] 空文本场景不报错
-  - [x] 可读性门槛文案正常显示
-  - [x] 文本输入具有 label
-  - [x] 按钮与输出区域可键盘访问
+### 样本结果
 
-## Accessibility Checks
+- 世卫中文样本：87 汉字，3 句，难字 0，分数 47.8
+- 世卫英文样本：46 词，3 句，Reading Ease 27.6
+- `I am a cat. I am a dog. I am a man.`：Reading Ease 118.2，界面不写 `/ 100`
 
-- [x] 键盘导航可达所有交互元素
-- [x] 输入控件绑定可见 label
-- [x] 焦点状态可见
-- [x] 色彩对比度达标
+## Known limits
 
-## Privacy Checks
+这些限制还在。不要再写成「暂无已知严重问题」。
 
-- [x] 无强制上传数据
-- [x] 无隐式密钥持久化
-- [x] 页面包含本地处理说明
-
-## Known Issues
-
-- **Issue**: 暂无已知严重问题
-- **Severity**: N/A
-- **Workaround**: N/A
+- **音节和分句是启发式。** `people` 算 1 个音节；`Mr. Smith went to U.S.A. yesterday.` 会被切成 5 段。
+- **中文难字只认四个示例字。** 随附新闻样本的难字数是 0，分数几乎只看句长。
+- **中文门槛切段复用 80 / 60 / 40。** 普通新闻句长经常落到「大学可读」。
+- **只在本目录起服务时，`../shared/` 会 404。** 计算还能跑。回退在 PR #1。
+- **没有自动化测试。**
 
 ## Sign-Off
 
-- **QA Sub-Agent**: Approved
-- **Project Agent**: Approved
-- **Master Agent**: Approved
+- **本轮**: 不盖章 Approved。上面的限制是已知行为，不是漏测。

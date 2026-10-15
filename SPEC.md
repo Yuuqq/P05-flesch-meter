@@ -31,7 +31,7 @@
 ## 5. Non-Functional Requirements
 
 - **Performance**: 核心任务 3 分钟内完成
-- **Accessibility**: 键盘导航、aria-label、焦点可见、WCAG AA 对比度
+- **Accessibility**: 键盘导航、可见控件名称（不用 aria-label 盖住按钮文字）、结果区 aria-live、焦点可见、WCAG AA 对比度
 - **Privacy**: 本地处理优先，不默认上传数据
 - **Browser support**: 现代 Chromium (Chrome 110+)
 

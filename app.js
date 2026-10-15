@@ -89,9 +89,13 @@ function updateSampleMeta(sample) {
 }
 
 function initSampleOptions() {
-  sampleSelect.innerHTML = realNewsSamples
-    .map(item => `<option value="${item.id}">${item.title}</option>`)
-    .join("");
+  sampleSelect.replaceChildren();
+  for (const item of realNewsSamples) {
+    const option = document.createElement("option");
+    option.value = item.id;
+    option.textContent = item.title;
+    sampleSelect.appendChild(option);
+  }
   updateSampleMeta(realNewsSamples[0]);
 }
 
@@ -139,7 +143,9 @@ function chineseReadability(text) {
   const sentences = splitSentences(text);
   const sentenceCount = Math.max(1, sentences.length);
   const avgCharsPerSentence = chars / sentenceCount;
-  const difficultChars = (text.match(/[龘齉饕鬣\u3400-\u4DBF]/g) || []).length;
+  // 教学启发式：只标四个示例生僻字。汉字分母是 U+4E00–U+9FFF，
+  // 不要把 CJK 扩展区放进分子，否则扩展字不计入字数却被当成难字。
+  const difficultChars = (text.match(/[龘齉饕鬣]/g) || []).length;
   const difficultRatio = chars ? difficultChars / chars : 0;
 
   // 启发式分值，越高越易读。
@@ -168,7 +174,17 @@ function levelByScore(score) {
 }
 
 function renderMetrics(items) {
-  metricsEl.innerHTML = items.map(item => `<li>${item}</li>`).join("");
+  metricsEl.replaceChildren();
+  for (const item of items) {
+    const li = document.createElement("li");
+    li.textContent = item;
+    metricsEl.appendChild(li);
+  }
+}
+
+function setContentLanguage(lang) {
+  textInput.lang = lang;
+  metricsEl.lang = lang;
 }
 
 function calculateReadability() {
@@ -178,6 +194,7 @@ function calculateReadability() {
     modeEl.textContent = "模式: -";
     scoreEl.textContent = "分数: -";
     levelEl.textContent = "建议门槛: -";
+    setContentLanguage("zh-CN");
     return;
   }
 
@@ -189,6 +206,7 @@ function calculateReadability() {
     modeEl.textContent = "模式: 中文启发式";
     scoreEl.textContent = `分数: ${r.score.toFixed(1)} / 100`;
     levelEl.textContent = `建议门槛: ${levelByScore(r.score)}`;
+    setContentLanguage("zh-CN");
     renderMetrics([
       `句子数: ${r.sentenceCount}`,
       `汉字数: ${r.charCount}`,
@@ -198,15 +216,20 @@ function calculateReadability() {
   } else {
     const r = englishReadability(text);
     modeEl.textContent = "模式: English Flesch Reading Ease";
-    scoreEl.textContent = `分数: ${r.score.toFixed(1)} / 100`;
+    scoreEl.textContent = `分数: ${r.score.toFixed(1)}`;
     levelEl.textContent = `建议门槛: ${levelByScore(r.score)}`;
-    renderMetrics([
+    setContentLanguage("en");
+    const lines = [
       `Sentences: ${r.sentenceCount}`,
       `Words: ${r.wordCount}`,
       `Syllables: ${r.syllables}`,
       `Average Sentence Length: ${r.asl.toFixed(2)}`,
       `Average Syllables per Word: ${r.asw.toFixed(2)}`
-    ]);
+    ];
+    if (r.score < 0 || r.score > 100) {
+      lines.push("Reading Ease 原始分可以超出 0–100，此处不封顶");
+    }
+    renderMetrics(lines);
   }
 }
 
@@ -235,6 +258,7 @@ clearBtn.addEventListener("click", () => {
   modeEl.textContent = "模式: -";
   scoreEl.textContent = "分数: -";
   levelEl.textContent = "建议门槛: -";
+  setContentLanguage("zh-CN");
 });
 
 // auto-load first sample on page init for instant demo

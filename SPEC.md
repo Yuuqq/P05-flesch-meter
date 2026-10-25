@@ -4,13 +4,13 @@
 
 - **Project ID**: P05
 - **Project Name**: 新闻阅读门槛 (Flesch) 测算仪
-- **Goal**: 计算中英文新闻稿的可读性指数 (Flesch-Kincaid 及中文变体)
+- **Goal**: 计算中英文新闻稿的可读性指数 (Flesch Reading Ease 及中文变体)
 - **User Persona**: 新闻编辑
 
 ## 2. Scope
 
 - **In scope**:
-  - 计算中英文新闻稿的可读性指数 (Flesch-Kincaid 及中文变体)
+  - 计算中英文新闻稿的可读性指数 (Flesch Reading Ease 及中文变体)
 - **Out of scope**:
   - 后端代理或服务端逻辑
   - API Key 持久化存储
@@ -24,7 +24,7 @@
 
 ## 4. Functional Requirements
 
-1. FR-1: 计算中英文新闻稿的可读性指数 (Flesch-Kincaid 及中文变体)
+1. FR-1: 计算中英文新闻稿的可读性指数 (Flesch Reading Ease 及中文变体)
 2. FR-2: 结果可视化展示
 3. FR-3: 错误状态可见提示
 

@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#5f46b5">
+  <meta name="theme-color" content="#F0E6CF">
   <meta name="color-scheme" content="light dark">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <title>P05 新闻阅读门槛测算仪</title>
-    <link rel="stylesheet" href="../shared/design-tokens.css" />
-<link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="../shared/design-tokens.css" />
+  <link rel="stylesheet" href="../shared/modern-styles.css" />
+  <link rel="stylesheet" href="../shared/tool-chrome.css" />
+  <link rel="stylesheet" href="./styles.css" />
   <meta name="description" content="新闻阅读门槛测算仪。P05 新闻阅读门槛测算仪" />
   <meta property="og:title" content="P05 新闻阅读门槛测算仪" />
   <meta property="og:description" content="新闻阅读门槛测算仪 — 前端纯静态新闻工具" />
@@ -16,75 +18,73 @@
   <meta property="og:url" content="https://yuuqq.github.io/P05-flesch-meter/" />
   <link rel="manifest" href="./manifest.json" />
 <style media="print">
-.gnav,.pedagogy-panel,.explore-section,[class*="dark-toggle"],button[aria-label]{display:none!important}
-body{background:#fff!important;color:#000!important;font-size:11pt}
-.app,main,.container{box-shadow:none!important;border:none!important;padding:0!important}
-a{color:#000!important;text-decoration:underline}
-a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
+.gnav,.gnav-fab,.gnav-overlay,.pedagogy-panel,.explore-section,[class*="dark-toggle"],#darkToggleBtn,#cmdPaletteOverlay,.onboarding-ring,.onboarding-tip,.skip-link{display:none!important}
+body{background:var(--print-paper)!important;color:var(--print-ink)!important;font-size:11pt}
+.app,main,.container,.sheet{box-shadow:none!important;border:none!important}
+a{color:var(--print-ink)!important;text-decoration:underline}
+a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:color-mix(in srgb, var(--print-ink) 62%, var(--print-paper))}
 @page{margin:2cm}
 </style>
 </head>
 <body>
   <a href="#main" class="skip-link">跳到主内容 / Skip to main content</a>
-  <main id="main" aria-label="主内容区域" class="app">
-    <header class="hero">
-      <h1>新闻阅读门槛测算仪</h1>
-      <p>实时估算稿件阅读难度，帮助你压缩长句、降低阅读门槛。</p>
-      <p class="note">包含英文 Flesch 指标 + 中文启发式可读性估算。</p>
+  <div class="sheet">
+    <header class="tool-chrome" data-tool-id="P05">
+      <a class="tool-chrome__mark" href="../P00-dashboard/">新闻实验工具</a>
+      <span class="tool-chrome__id">P05</span>
     </header>
 
-    <section class="card">
-      <details class="teach-card" open>
-        <summary>🎓 可读性指数与新闻质量</summary>
+    <main id="main" aria-label="主内容区域" class="app">
+      <details class="tool-teach">
+        <summary>如何使用</summary>
+        <p>粘贴稿件，或载入一条改写新闻示例，再按「计算可读性」。分数越高越容易阅读。</p>
         <p>Flesch 可读性指数是衡量文本阅读难度的经典公式，基于句长和音节数计算。在新闻写作中，降低阅读门槛意味着更广泛的受众覆盖。数值越高越容易阅读：60-70 分适合普通读者，30 分以下属专业/学术级别。</p>
       </details>
-    </section>
 
-    <section class="card">
-      <label for="textInput">稿件文本</label>
-      <textarea id="textInput" rows="12" placeholder="粘贴新闻稿件..."></textarea>
-      <div class="sample-block">
-        <label for="sampleSelect">真实新闻示例（改写版）</label>
-        <select id="sampleSelect"></select>
-        <p id="sampleMeta" class="note">来源: -</p>
-        <a id="sampleLink" class="sample-link" href="#" target="_blank" rel="noopener noreferrer">查看原始报道</a>
-      </div>
-      <div class="actions">
-        <button id="loadSampleBtn" type="button" aria-label="load Sample">载入示例并计算</button>
-        <button id="calcBtn" type="button" aria-label="calc">计算可读性</button>
-        <button id="clearBtn" type="button" aria-label="clear">清空</button>
-      </div>
-    </section>
+      <header class="hero">
+        <h1>新闻阅读门槛测算仪</h1>
+        <p>实时估算稿件阅读难度，帮助你压缩长句、降低阅读门槛。</p>
+        <p class="note">包含英文 Flesch 指标 + 中文启发式可读性估算。</p>
+      </header>
 
-    <section class="grid">
-      <article class="card">
-        <h2>核心指标</h2>
-        <ul id="metrics" class="metrics"></ul>
-      </article>
-      <article class="card">
-        <h2>结果解释</h2>
-        <p id="mode">模式: -</p>
-        <p id="score">分数: -</p>
-        <p id="level">建议门槛: -</p>
-      </article>
-    </section>
-  </main>
-    <script src="./pm-metrics.js" defer></script>
-<script src="./app.js" defer></script>
+      <section class="card">
+        <label for="textInput">稿件文本</label>
+        <textarea id="textInput" rows="12" placeholder="粘贴新闻稿件..."></textarea>
+        <div class="sample-block">
+          <label for="sampleSelect">真实新闻示例（改写版）</label>
+          <select id="sampleSelect"></select>
+          <p id="sampleMeta" class="note">来源: -</p>
+          <a id="sampleLink" class="sample-link" href="#" target="_blank" rel="noopener noreferrer">查看原始报道</a>
+        </div>
+        <div class="actions">
+          <button id="loadSampleBtn" type="button" aria-label="load Sample">载入示例并计算</button>
+          <button id="calcBtn" type="button" aria-label="calc">计算可读性</button>
+          <button id="clearBtn" class="secondary" type="button" aria-label="clear">清空</button>
+        </div>
+      </section>
 
-  <!-- Privacy Notice -->
-  <div style="text-align:center;padding:12px 16px;font-size:12px;color:#888;border-top:1px solid #eee;margin-top:24px;">
-    🔒 隐私提示：本工具所有数据处理均在您的浏览器本地完成，不会上传任何数据至服务器。
+      <section class="grid">
+        <article class="card">
+          <h2>核心指标</h2>
+          <ul id="metrics" class="metrics"></ul>
+        </article>
+        <article class="card">
+          <h2>结果解释</h2>
+          <p id="mode">模式: -</p>
+          <p id="score">分数: -</p>
+          <p id="level">建议门槛: -</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="tool-footer">
+      数据边界以附录 A 为准：能在本机完成的计算不主动外发；示例数据仅供课堂；本工具输出不得单独当作结论。
+      <a href="../P00-dashboard/">返回工具箱</a>
+    </footer>
   </div>
-
-  <!-- Cross-Project Navigation -->
-  <nav aria-label="工具箱导航" style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:13px;border-top:1px solid #e5e5e5;margin-top:16px;color:#666;">
-    <a href="https://yuuqq.github.io/journalism-toolbox/" style="text-decoration:none;">📋 工具箱导航</a>
-    <span style="opacity:.4">P05</span>
-  </nav>
+  <script src="./pm-metrics.js" defer></script>
+  <script src="./app.js" defer></script>
   <script src="../shared/releases/v2.6/loader.js" data-modules="dark,cmd,toast,onboarding,url-state,pedagogy-p1,pedagogy-p2,nav,kbd"></script>
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}</script>
-
 </body>
 </html>
-

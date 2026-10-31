@@ -1,52 +1,58 @@
-:root {
-  --bg: #f6f4ff;
-  --card: #ffffff;
-  --line: #d6d0ef;
-  --ink: #22193a;
-  --accent: #5f46b5;
-}
+/* P05 layout only. Colour, type, radius, and motion come from ../shared tokens. */
 
-* {
-  box-sizing: border-box;
-}
-
+html,
 body {
-  margin: 0;
-  color: var(--ink);
-  font-family: "Source Sans 3", "Noto Sans SC", sans-serif;
-  background:
-    radial-gradient(circle at 20% 10%, #ece5ff 0, transparent 35%),
-    radial-gradient(circle at 80% 85%, #e8f3ff 0, transparent 35%),
-    var(--bg);
+  overflow-x: clip;
+}
+
+.sheet {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+/* modern-styles paints every link cinnabar + dotted, at high :not() specificity. */
+a.tool-chrome__mark:not(.btn):not(.map-link):not(.open-btn):not(.chip):not(.pill):not(.gnav-item) {
+  color: var(--ink) !important;
+  text-decoration-line: none !important;
+  text-decoration-style: solid !important;
 }
 
 .app {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 16px;
+  padding-top: 0;
 }
 
-.hero,
-.card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px;
-  margin-bottom: 12px;
+.hero p {
+  margin: 0 0 var(--space-sm);
+}
+
+.hero p:last-child {
+  margin-bottom: 0;
 }
 
 .hero h1 {
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-serif);
+  color: var(--ink);
+  background: none;
+  -webkit-text-fill-color: currentColor;
 }
 
 .note {
-  color: #4b3e7c;
+  color: var(--ink-secondary);
+}
+
+.tool-teach p {
+  margin: 0 0 var(--space-sm);
+}
+
+.tool-teach p:last-child {
+  margin-bottom: 0;
 }
 
 label {
   display: block;
-  font-weight: 700;
-  margin-bottom: 6px;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
 }
 
 textarea,
@@ -57,65 +63,81 @@ button {
 
 textarea {
   width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 10px;
+  border: var(--rule-hair) solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--card);
+  color: var(--ink);
+  resize: vertical;
 }
 
 .sample-block {
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px dashed var(--line);
-  border-radius: 10px;
-  background: #faf8ff;
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: var(--rule-hair) dashed var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
 }
 
 select {
   width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 8px 10px;
-  background: #fff;
+  border: var(--rule-hair) solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--card);
+  color: var(--ink);
+  min-height: 44px;
 }
 
 .sample-link {
   display: inline-block;
-  margin-top: 4px;
+  margin-top: var(--space-xs);
   color: var(--accent);
-  text-decoration: none;
-}
-
-.sample-link:hover,
-.sample-link:focus-visible {
-  text-decoration: underline;
 }
 
 .actions {
-  margin-top: 10px;
+  margin-top: var(--space-md);
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
 }
 
 button {
-  border: 0;
-  border-radius: 999px;
-  padding: 8px 14px;
-  color: #fff;
+  border: var(--rule-hair) solid var(--accent);
+  border-radius: var(--radius-md);
+  min-height: 44px;
+  padding: 10px 16px;
+  color: var(--accent-ink);
+  background: var(--accent);
   cursor: pointer;
-  background: linear-gradient(135deg, #6a56be, #4a3598);
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.card h2 {
+  margin-top: 0;
 }
 
 .grid {
   display: grid;
-  gap: 12px;
+  gap: var(--space-md);
   grid-template-columns: 1fr 1fr;
 }
 
 .metrics {
   margin: 0;
-  padding-left: 18px;
+  padding-left: 1.15em;
   line-height: 1.8;
+}
+
+#mode,
+#score,
+#level {
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 860px) {
@@ -124,294 +146,10 @@ button {
   }
 }
 
-/* === Dark Mode Override (auto-generated) === */
-:root[data-theme="dark"] {
-  --bg: #1a1a2e;
-  --card: #242438;
-  --line: #3a3a50;
-  --ink: #e8e8f0;
-  --accent: #ff7b54;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-  --bg: #1a1a2e;
-  --card: #242438;
-  --line: #3a3a50;
-  --ink: #e8e8f0;
-  --accent: #ff7b54;
-  }
-}
-
-/* === CSS Professor Upgrade (Round 20) === */
-
-/* Card system */
-.card, [class*="card"], section, .panel, .container > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.card:hover, [class*="card"]:hover { transform: translateY(-2px); }
-
-/* Button polish */
-button, .btn, [type="submit"], [type="button"] {
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-button:hover, .btn:hover, [type="submit"]:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-button:active, .btn:active { transform: scale(0.98); }
-
-/* Input polish */
-input, textarea, select {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-input:focus, textarea:focus, select:focus {
-  box-shadow: 0 0 0 3px rgba(199,73,31,0.15);
-}
-
-/* Link hover */
-a { transition: color 0.15s ease; }
-
-/* Focus outline */
-:focus-visible { outline: 2px solid var(--accent, #c7491f); outline-offset: 2px; }
-
-/* Mobile responsive */
-@media (max-width: 600px) {
-  body { padding: 8px; }
-  .app, main, .container { padding: 12px; }
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.2rem; }
-  button, .btn { width: 100%; }
-}
-
-/* === CSS Professor Animation Upgrade (Round 22) === */
-
-/* Page entrance */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.app, main, body > .container { animation: fadeInUp 0.4s ease-out; }
-
-/* Staggered card entrance */
-@keyframes cardReveal {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-.card, [class*="card"], .mission-card, .module-card, .stat-card {
-  animation: cardReveal 0.35s ease-out both;
-}
-.card:nth-child(2), [class*="card"]:nth-child(2) { animation-delay: 0.05s; }
-.card:nth-child(3), [class*="card"]:nth-child(3) { animation-delay: 0.1s; }
-.card:nth-child(4), [class*="card"]:nth-child(4) { animation-delay: 0.15s; }
-.card:nth-child(5), [class*="card"]:nth-child(5) { animation-delay: 0.2s; }
-
-/* Subtle pulse for primary buttons */
-@keyframes btnPulse {
-  0%, 100% { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-  50% { box-shadow: 0 2px 12px rgba(199,73,31,0.25); }
-}
-button[id*="Btn"]:not(:disabled), .btn-primary {
-  animation: btnPulse 3s ease-in-out infinite;
-}
-button:disabled { animation: none; opacity: 0.6; }
-
-/* Smooth height transitions for collapsible sections */
-details { transition: all 0.2s ease; }
-details[open] summary { margin-bottom: 8px; }
-
-/* Tooltip fade */
-[title] { position: relative; }
-
-/* Progress bar animation */
-@keyframes progressFill {
-  from { width: 0; }
-}
-.mc-bar-fill, .mod-progress-fill, .bar-fill, progress::-webkit-progress-value {
-  animation: progressFill 0.6s ease-out;
-}
-
-/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .app,
+  .card,
+  button {
+    animation: none;
   }
-}
-
-/* === Loading & Feedback States === */
-@keyframes spin { to { transform: rotate(360deg); } }
-.btn-loading { position: relative; pointer-events: none; opacity: 0.7; }
-.btn-loading::after {
-  content: '';
-  position: absolute;
-  right: 8px; top: 50%;
-  width: 14px; height: 14px;
-  margin-top: -7px;
-  border: 2px solid transparent;
-  border-top-color: currentColor;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
-.toast-msg {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #333; color: #fff; padding: 10px 20px; border-radius: 8px;
-  font-size: 0.9rem; z-index: 9999; opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.toast-msg.show { opacity: 1; }
-
-/* ---- Print-friendly polish (v2.3 batch) ---- */
-@media print {
-  body { background: white !important; color: black !important; }
-  .global-nav, [data-nav], .skip-link, button:not(.print-keep), .btn:not(.print-keep) { display: none !important; }
-  a { color: inherit; text-decoration: underline; }
-  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; word-break: break-all; }
-  .card, .panel, .hero { box-shadow: none !important; border: 1px solid #ccc !important; page-break-inside: avoid; }
-  h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
-}
-
-/* =====================================================================
- * v2.4.1 deep polish (Tier-2 batch) — ui-ux-pro-max + frontend-design
- * Uses each tool's existing --accent / --line / --card / --ink tokens.
- * Architect-approved on Tier-1 (v2.4.1 / 2026-05). All :where / class
- * scoped — won't affect tools that don't use these classes.
- * ===================================================================== */
-
-/* P3 Hierarchy — Hero h1 brand gradient with 3-tier fallback chain */
-.hero h1 {
-  color: var(--accent, var(--focus, #2563eb));
-  background: linear-gradient(135deg,
-    var(--accent, var(--focus, #2563eb)) 0%,
-    #1e3a8a 100%);
-  background: linear-gradient(135deg,
-    var(--accent, var(--focus, #2563eb)) 0%,
-    color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 65%, var(--ink, #0f172a)) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-@supports not (background-clip: text) {
-  .hero h1 {
-    color: var(--accent, var(--focus, #2563eb));
-    -webkit-text-fill-color: currentColor;
-    background: none;
-  }
-}
-
-/* P5 Layout — hero subtitle improved rhythm */
-.hero .lead { max-width: 64ch; }
-.hero .subtle { max-width: 72ch; opacity: 0.85; }
-
-/* P8 Buttons — primary via explicit hooks (no :first-of-type guesswork) */
-.btn-primary, [data-primary],
-button#scanBtn, button#submitBtn, button#generateBtn, button#checkBtn,
-button#extractBtn, button#startBtn, button#runBtn, button#analyzeBtn,
-button[type="submit"]:not(.ghost):not(.btn-secondary) {
-  background: linear-gradient(180deg,
-    var(--accent, var(--focus, #2563eb)),
-    #1e40af);
-  background: linear-gradient(180deg,
-    var(--accent, var(--focus, #2563eb)),
-    color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 78%, #000));
-  color: #fff;
-  border: 1px solid #1e40af;
-  border: 1px solid color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 70%, #000);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px -6px rgba(37,99,235,0.5);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px -6px color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 50%, transparent);
-}
-
-/* P7 Micro — card hover lift; guarded by hover capability + reduced-motion */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .card:not(.hero):not(:has(textarea)):not(:has(form)) {
-    transition: transform 0.18s ease, box-shadow 0.22s ease;
-  }
-  .card:not(.hero):not(:has(textarea)):not(:has(form)):hover {
-    transform: translateY(-1px);
-  }
-}
-
-/* P8 Forms — textarea focus halo */
-textarea {
-  border-radius: 10px;
-  transition: border-color 0.15s ease, box-shadow 0.18s ease;
-}
-textarea:focus, textarea:focus-visible {
-  border-color: var(--accent, var(--focus, #2563eb));
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 18%, transparent);
-}
-
-/* P5 Status — aria-live regions render as accent-tinted pill */
-[aria-live="polite"], [aria-live="assertive"], #status {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.85em;
-  background: rgba(37,99,235,0.08);
-  background: color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 8%, transparent);
-  border: 1px solid rgba(37,99,235,0.18);
-  border: 1px solid color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 18%, transparent);
-  font-variant-numeric: tabular-nums;
-}
-
-/* P6 Details/teach-card — hover affordance */
-details.teach-card summary {
-  cursor: pointer;
-  border-radius: 8px;
-  padding: 4px 6px;
-  margin: -4px -6px;
-  transition: background 0.15s ease;
-}
-details.teach-card summary:hover {
-  background: rgba(37,99,235,0.08);
-  background: color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 8%, transparent);
-}
-details.teach-card[open] summary {
-  margin-bottom: 4px;
-}
-
-/* P5 Mobile — sticky hero on small screens (with solid bg fallback) */
-@media (max-width: 640px) {
-  .hero {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    background: var(--card, #fff);
-    background: color-mix(in srgb, var(--card, #fff) 88%, transparent);
-  }
-  @supports not (backdrop-filter: blur(8px)) {
-    .hero { background: var(--card, #fff); }
-  }
-}
-
-/* =====================================================================
- * v2.5 tool-specific — per-tool unique enhancements
- * Archetypes: chart_svg, json_textarea
- * ===================================================================== */
-
-/* Chart/SVG visualization emphasis */
-svg { display: block; max-width: 100%; }
-svg text { font-family: ui-sans-serif, system-ui, "Noto Sans SC", sans-serif; }
-.chart, .chart-card, .chartWrap, [id="chart"], [id="scatterPlot"], [id="chartContainer"] {
-  border-radius: 12px;
-  background: var(--card, #fff);
-  position: relative;
-}
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  svg [data-bar], svg .bar, svg path[data-segment], svg rect[data-bar] {
-    transition: opacity 0.15s ease;
-  }
-  svg [data-bar]:hover, svg .bar:hover { opacity: 0.85; }
-}
-
-/* JSON / code textarea */
-textarea[id*="json"i], textarea[id*="config"i], textarea[id="input"], textarea#configArea, textarea#configInput {
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Cascadia Code", "Source Code Pro", monospace;
-  font-size: 0.88em;
-  line-height: 1.55;
-  tab-size: 2;
-  -moz-tab-size: 2;
 }
